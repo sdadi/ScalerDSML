@@ -39,12 +39,38 @@ print('Days with Sad mood and sleep < median sleep')
 
 
 #Q longest streak where Inactive and claories < daily mean across full dataset
-daily_mean_calories = np.mean(calories[is_active == 'Inactive'])
+daily_mean_calories = np.mean(calories)
+print('daily mean of calories: ',daily_mean_calories)
 longest_streak = 0
 current_streak = 0
-for streak in calories[is_active == 'Inactive']:
-    if streak < daily_mean_calories:
+for streak in (is_active=='Inactive')&(calories<daily_mean_calories):
+    if streak:
         current_streak += 1
-    else:
         longest_streak = max(longest_streak,current_streak)
+    else:
+        current_streak=0
 print('longest streak where Inactive and claories < daily mean across full dataset: ', longest_streak)
+long_mask = (is_active=='Inactive')&(calories<daily_mean_calories)
+print('data for longest streak:\n',long_mask)
+
+#Q10 Calculate the correlation between step count and calories burned.
+print('Correlaton between step count and calories burned \n:', np.corrcoef(step_count,calories)[0,1])
+
+
+#Q12 What is the standard deviation of step count only for "Happy" mood days?
+print('Standard deviation of step count only for "Happy" mood days?',np.std(step_count[(mood=='Happy')]))
+
+#Q13 What is the most frequent number of hours slept?
+print('Most frequent number of hours slept?: \n', np.bincount(sleep).argmax())
+
+#Q14 Which mood has the lowest average calories burned on days with more than the median hours of sleep and a step count above 4000?
+calories_avg = np.average(calories)
+sleep_median = np.median(sleep)
+mask = (sleep > sleep_median) & (step_count > 4000)
+mood_filtered = mood[mask]
+calories_filtered = calories[mask]
+
+
+
+
+print('Mood with lowest average calories burned on days with more than the median hours of sleep and a step count above 4000?')
