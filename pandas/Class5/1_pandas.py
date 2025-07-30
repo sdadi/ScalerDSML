@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('mckinsey.csv') #df is a variable of type dataframe
+df = pd.read_csv('..\mckinsey.csv') #df is a variable of type dataframe
 # print(df) # prints entire table data of CSV file
 print(type(df)) #<class 'pandas.core.frame.DataFrame'> is similar to a Table with Rows, Columns or 2D matrix
 
@@ -76,3 +76,15 @@ sample = df.head()
 
 sample.index = ['a','b','c','d','e']
 print('str indices of sample', sample)
+
+print('iloc[-1] should return ',df.iloc[[-1,-2]])
+
+print('multiple indexes at same time using df.iloc[[0,3,1,1]]', df.iloc[[0,3,1,1]])
+
+temp = df.set_index('country')
+print('country set as index: ',temp)
+print('only data of Afganistan using df.loc[Afganistan]', temp.loc['Afghanistan'])
+# temp.loc['Afghanistan'] is same as df.loc[df['country']=='Afghanistan']
+
+print('temp.iloc[3] for custm indexing column as country', temp.iloc[3])
+

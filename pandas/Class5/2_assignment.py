@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('mckinsey.csv') #df is a variable of type dataframe
+df = pd.read_csv('..\mckinsey.csv') #df is a variable of type dataframe
 
 #Q1 first 20 rows
 print('first 20 rows using df.head(20) and df.iloc[:20]:',df.head(20),df.iloc[:20])
@@ -9,7 +9,7 @@ print('first 20 rows using df.head(20) and df.iloc[:20]:',df.head(20),df.iloc[:2
 print('unique() on df:', df.nunique())
 
 #Q3 extract data in specified columns order
-df_tips = pd.read_csv('tips.csv')
+df_tips = pd.read_csv('..\tips.csv')
 print('first 2 rows:', df_tips.head(2))
 print(df_tips.columns)
 print('extract the mentioned columns in the order: time, total_bill, tip',pd.DataFrame(df_tips,columns=['time','total_bill','tip']))
@@ -20,7 +20,7 @@ print('extract the mentioned columns in the order: time, total_bill, tip',df_tip
 
 #Q4 df.loc[:2,"total_bill":"day"]
 print('print 2 rows with 3 columns :',df_tips.loc[:2,'total_bill':'day'])
-df_cars = pd.read_csv('mtcars.csv')
+df_cars = pd.read_csv('..\mtcars.csv')
 # print(df_cars)
 #setting model as indexing column
 df_cars.set_index("model",inplace=True)
