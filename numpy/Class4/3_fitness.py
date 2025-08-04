@@ -64,13 +64,21 @@ print('Standard deviation of step count only for "Happy" mood days?',np.std(step
 print('Most frequent number of hours slept?: \n', np.bincount(sleep).argmax())
 
 #Q14 Which mood has the lowest average calories burned on days with more than the median hours of sleep and a step count above 4000?
-calories_avg = np.average(calories)
+# calories_avg = np.average(calories)
 sleep_median = np.median(sleep)
 mask = (sleep > sleep_median) & (step_count > 4000)
 mood_filtered = mood[mask]
 calories_filtered = calories[mask]
 
+lowest_avg = float('inf')
+lowest_mood = None
+for m in np.unique(mood_filtered):
+    print('value of m in mood unique -- ',m)
+    avg = np.mean(calories_filtered[mood_filtered == m])
+    print('lowest values are:--- ',avg,m)
+    if avg < lowest_avg:
+        lowest_avg = avg
+        lowest_mood = m
+# mood_mean = np.min([np.average(calories[mood ==m]) for m in np.unique(mood)])
 
-
-
-print('Mood with lowest average calories burned on days with more than the median hours of sleep and a step count above 4000?')
+print('Mood with lowest average calories burned on days with more than the median hours of sleep and a step count above 4000?',lowest_mood,lowest_avg)
