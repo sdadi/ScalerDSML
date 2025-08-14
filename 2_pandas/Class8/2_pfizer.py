@@ -12,7 +12,7 @@ data_melt = pd.melt(data,id_vars=['Date','Parameter','Drug_Name'])
 print('raw melt data:\n',data_melt)
 data_melt = pd.melt(data,id_vars=['Date','Parameter','Drug_Name'],var_name='time',value_name='reading')
 print('shape after pd.melt():\n',data_melt)
-
+exit()
 # #opposite of melting is pivoting -> goes back to original data
 data_pivot = data_melt.pivot(index=['Date','Drug_Name','Parameter'],
                 columns='time',
