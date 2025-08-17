@@ -17,7 +17,17 @@ df = pd.DataFrame({
   "customer": ["Andrew", "Andrew", "Tom", "Andrew", "Tobey", "Peter"],
   "quantity": [1, 2, 2, 3, 1, 2],
 })
-df.fillna()
+# df.fillna()
 
 # print(pd.pivot(df,index=['Accessories'],columns='customer',values='quantity'))
 print(df.groupby(['Accessories','customer']).quantity.sum())
+
+# Q8. Location Divide
+
+df = pd.DataFrame({'City\tState': ["Kolkata\tWest Bengal", "Chennai\tTamil Nadu", "Hyderabad\tTelengana", "Bangalore\tKarnataka"]})
+print(df)
+list = df['City\tState'].str.split('\t',expand=True)
+print(list)
+# df.columns = ['City','State']
+df = list.columns=['City','State']
+print(type(list))
