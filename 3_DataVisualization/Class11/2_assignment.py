@@ -4,9 +4,10 @@ import os as os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+assets_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets")
 
 #Q1  impact of age and gender on the chances of survival
-titanic = pd.read_csv('titanic.csv')
+titanic = pd.read_csv(os.path.join(assets_path,"titanic.csv"))
 males = titanic.loc[titanic['sex'] == 'male']
 print(males)
 female = titanic.loc[titanic['sex'] == 'female']
