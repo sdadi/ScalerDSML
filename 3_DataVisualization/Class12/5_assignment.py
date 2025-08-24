@@ -9,8 +9,8 @@ data = pd.read_csv(os.path.join(assets_path,"titanic_big.csv"))
 #https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/021/299/original/final_vg1_-_final_vg_%281%29.csv?1670840166
 os.system('cls')
 
-# sns.boxplot(data=data,x='alone',y='age',hue='survived')
-# plt.show()
+sns.boxplot(data=data,x='alone',y='age',hue='survived')
+plt.show()
 
 # Q2 telco customers churning
 telco = pd.read_csv(os.path.join(assets_path,"telco_customer_churning.csv"))

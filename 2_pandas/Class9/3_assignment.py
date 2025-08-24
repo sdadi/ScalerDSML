@@ -15,10 +15,13 @@ print('How many years of data in movies dataset: ',movies['year'].nunique())
 print('DMY snippte:\n',movies['day']+'-'+movies['month']+'-'+movies['year'].astype('str'))
 
 # Q3. Male percentage
-print('Q4. Movies Direction --- ',directors['gender'].value_counts(normalize=True)*100)
-
+print('Q3. Movies Direction --- ',directors['gender'].value_counts(normalize=True)*100)
+print('Q4. how many different movies directed in the year 2010:',movies[movies['year'] == 2010]['title'].nunique())
 print('Q5. Movies - How many different directors have directed a movie since 2010 (inclusive)?', movies[movies['year'] >= 2010]['director_id'].nunique())
-
+sample = movies[movies['year'] >= 2010]
+ids = sample['director_id'].unique()
+names = directors[directors['id'].isin(ids)]['director_name']
+print('Q6 names of all distinct directors directed since 2010\n',names)
 print('Q7 -------------')
 print('Q7 using query',data.query("title == 'Spider-Man 3'").get('director_name'))
 print('Q7 using loc',data.loc[data["title"] == "Spider-Man 3", "director_name"])
@@ -38,7 +41,7 @@ print('top 10 popular movies are also among top 10 rated (vote_avg):\n',top10pop
 
 # print('revenue per budge',data['revenue']/data['budget'])
 
-print(' year did Christopher Nolan produce the most number of movies',data[data['director_name'] == 'Christopher Nolan']['year'].unique())
+print('Q12 year did Christopher Nolan produce the most number of movies\n',data[data['director_name'] == 'Christopher Nolan']['year'].unique())
 
 bins = [1950,1960,1970,1980,1990,2000,2010,2020]
 labels = ['1950-60','1960-70','1970-80','1980-90','1990-2000','2000-10','2010-20']
@@ -54,13 +57,14 @@ decade_dir_counts = data[data['decade'] == decade_most_movies].groupby(['directo
 # print('top director in each decade:\n',decade_dir_counts.loc[decade_dir_counts.groupby('decade')['movie_count'].idxmax()])
 # print('---- :\n',decade_dir_counts.sort_values('movie_count',ascending=False))
 print('director coutns:\n',data[data['decade'] == decade_most_movies]['director_name'].value_counts())
+print('director counts in whole dataset:\n',data['director_name'].value_counts().head(10))
 
 def get_decade(year):
     return (year//10)*10
 data['decade'] = data['year'].apply(get_decade)
 decade_most_movies = data['decade'].value_counts().index[0]
 print('decade ',data[data['decade'] == decade_most_movies]['director_name'].value_counts().head(10))
-print('decade list',data['director_name'].value_counts().head())
+print('Q14 options are for whole dataset instead of decade with most number of movies\n',data['director_name'].value_counts().head())
 
-# years = data['year'].value_counts()
-# print('years movies produced are more than 70:\n',years[years >= 70].index)
+years = data['year'].value_counts()
+print('years movies produced are more than 70:\n',years[years >= 70].index)

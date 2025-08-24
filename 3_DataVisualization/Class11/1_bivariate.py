@@ -3,9 +3,13 @@ import pandas as pd
 import os as os
 import matplotlib.pyplot as plt
 import seaborn as sns
-import warnings
 
-data = pd.read_csv(os.path.join(os.path.dirname(os.getcwd()),"final_vg.csv"))
+assets_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets")
+
+os.system('cls')
+
+
+data = pd.read_csv(os.path.join(assets_path,"final_vg.csv"))
 #https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/021/299/original/final_vg1_-_final_vg_%281%29.csv?1670840166
 print(data.head())
 print('shape of the data:\n',data.shape)

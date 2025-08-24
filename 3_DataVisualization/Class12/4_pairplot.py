@@ -21,15 +21,15 @@ top3data = data[
     (data['Genre'].isin(top3gen.index))
 ]
 
-# sns.countplot(data=top3data,x='Genre',hue='Publisher')
-# plt.show()
+sns.countplot(data=top3data,x='Genre',hue='Publisher')
+plt.show()
 
-# sns.countplot(data=top3data,x='Genre',hue='Platform')
-# plt.show()
+sns.countplot(data=top3data,x='Genre',hue='Platform')
+plt.show()
 
 #pair wise comparison works for numeric only
-# sns.pairplot(data=top3data)
-# plt.show()
+sns.pairplot(data=top3data)
+plt.show()
 
 data_corr = top3data.corr(numeric_only=True)
 print('data correlation:\n',data_corr)

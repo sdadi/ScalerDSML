@@ -20,17 +20,22 @@ top3data = data[
     (data['Platform'].isin(top3platf.index)) &
     (data['Genre'].isin(top3gen.index))
 ]
-
-# sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='scatter')
-sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='hex')
+# print('input data for all top3 Publisher, Genre and Platform:\n',top3data)
+# plt.title('Joint plot between NA_Sales and EU_Sales')
+sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='scatter')
+# sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='hex')
 plt.show()
-
+exit()
 x = np.random.randn(10000,2)
 print('shape of x:', x.shape)
 
+print('scatter plot of x[:,0] and x[:,1]\n',x[:,0])
+plt.title('scatter plot of x[:,0] and x[:,1]')
 plt.scatter(x[:,0],x[:,1])
 plt.show()
 
+plt.title('joint plot of x[:,0] and x[:,1]')
 sns.jointplot(x=x[:,0],y=x[:,1])
+plt.title('joint plot of x[:,0] and x[:,1] of kind hex')
 sns.jointplot(x=x[:,0],y=x[:,1],kind='hex')
 plt.show()
