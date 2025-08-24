@@ -42,7 +42,9 @@ df = pd.DataFrame(data)
 print('population data:\n',df)
 print(df['population']/df['area'])
 df['density'] = df['population']/df['area']
-print(df.sort_values('density'))
+print('population densitiy data using sort_values\n',df.sort_values('density'))
+df.set_index('city',inplace=True)
+print('population densitiy column only using sort_values\n',df['density'].sort_values())
 
 #Q4 series of male name in age 23-30
 data = {
@@ -58,6 +60,17 @@ df = pd.DataFrame(data)
 df = df[(df['gender'] == 'male')]#filter male
 print('names in age group 23 to 30:\n',df[(df['age'] >=23) & (df['age'] <=30)])
 
+# Q5: Revolving around axis
+df1 = pd.DataFrame({
+    'name':['Abish','Kenny','Harleen','Zakeer'],
+    'score':[9,8,8,10]
+})
+df2 = pd.DataFrame({
+    'name':['Bassi','Kunal','Abhi','Gurleen'],
+    'score':[10,6,9,8]
+})
+print('after axis 0 concat:\n', pd.concat([df1,df2],axis=0))
+print('after axis 0 concat ignore index:\n', pd.concat([df1,df2],axis=0,ignore_index=True))
 #Q6 concatenate and drop a row
 out = 4
 df = pd.DataFrame({
@@ -108,17 +121,18 @@ df2 =pd.DataFrame({
 },index=['fourth','fifth','sixth','seventh'])
 # df2.set_index('colname')
 df3=pd.concat([df1,df2]) 
+print('initial df3 after concat of df1 df2:\n',df3)
 
 #Block a
 df4=df3.drop(["fourth"])  
 print('initial df4:\n',df4)
 #Block b
 df4 = df3.reset_index().drop_duplicates(subset='index', keep='last')     
-print(df4)     
+print('after reset_index() and drop duplicate and keep last\n',df4)     
 df4 = df4.set_index('index').sort_index()
 
 #Block c
-df3.loc['fourth','A']*2
+print('loc[fourth,A]*2 operation\n',df3.loc['fourth','A']*2)
 
 print('final :\n',df3)
 
@@ -132,9 +146,11 @@ df = pd.DataFrame({
 
 year_bins = [1969,1980,1990,2000,2010,2020]
 year_labels = [ '(1969, 1980]', '(1980, 1990]', '(1990, 2000]', '(2000, 2010]', '(2010, 2021]']
+print('original df:\n',df)
 df['Year'] = pd.cut(df['Year'],bins=year_bins,labels=year_labels)
 # result = 
 result = pd.DataFrame(df.groupby('Year')['Spending_USD'].mean().round(3))
+print('df of yearly spending:\n',result)
 result.rename(columns={'Spending_USD':'avg_expenditure'},inplace=True)
 print('final df for yearly spending:\n',result)
 
@@ -154,3 +170,16 @@ pivot_table = df.pivot_table(index='Region',values='Sales',aggfunc='sum',fill_va
 # result = pd.pivot_table(df, index='Region', aggfunc='sum')
 # df = pd.pivot(df,index=['Region'],columns='Sales')
 print(pivot_table)
+
+# Q9 merge pandas
+df1 = pd.DataFrame({
+    'Names':['Jack','Roman','Steph'],
+    'Profession':['Accounting','Engineering','Engineering']
+})
+print('df1:\n',df1)
+df2 =pd.DataFrame({
+    'Profession':['Accounting','Accounting','Engineering','Engineering','HR','HR'],
+    'skills_required':['math','spreadsheets','coding','linux','spreadsheets','organization']
+})
+print('df2:\n',df2)
+print('after merging df1 and df2:\n', pd.merge(df1,df2))
