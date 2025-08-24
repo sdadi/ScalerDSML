@@ -1,6 +1,10 @@
+import numpy as np
 import pandas as pd
+import os as os
 
-df = pd.read_csv('..\mckinsey.csv') #df is a variable of type dataframe
+assets_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets")
+df = pd.read_csv(os.path.join(assets_path,"mckinsey.csv"))
+
 # print(df) # prints entire table data of CSV file
 print(type(df)) #<class 'pandas.core.frame.DataFrame'> is similar to a Table with Rows, Columns or 2D matrix
 

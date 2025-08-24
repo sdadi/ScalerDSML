@@ -1,7 +1,10 @@
+import numpy as np
 import pandas as pd
+import os as os
 
-df = pd.read_csv('..\mckinsey.csv') #df is a variable of type dataframe
-
+assets_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "assets")
+df = pd.read_csv(os.path.join(assets_path,"mckinsey.csv"))
+os.system('cls')
 #Q1 first 20 rows
 print('first 20 rows using df.head(20) and df.iloc[:20]:',df.head(20),df.iloc[:20])
 
@@ -9,18 +12,18 @@ print('first 20 rows using df.head(20) and df.iloc[:20]:',df.head(20),df.iloc[:2
 print('unique() on df:', df.nunique())
 
 #Q3 extract data in specified columns order
-df_tips = pd.read_csv('..\tips.csv')
-print('first 2 rows:', df_tips.head(2))
+df_tips = pd.read_csv(os.path.join(assets_path,"tips.csv"))
+print('first 2 rows:\n', df_tips.head(2))
 print(df_tips.columns)
 print('extract the mentioned columns in the order: time, total_bill, tip',pd.DataFrame(df_tips,columns=['time','total_bill','tip']))
 # df_with_cols = df_tips[['time','total_bill','tip']]
-print('extract the mentioned columns in the order: time, total_bill, tip',df_tips[['time','total_bill','tip']])
-print('extract the mentioned columns in the order: time, total_bill, tip',df_tips.loc[:,['time','total_bill','tip']])
-print('extract the mentioned columns in the order: time, total_bill, tip',df_tips.iloc[:,0:2]) #not correct
+print('extract the mentioned columns in the order: [time, total_bill, tip]\n',df_tips[['time','total_bill','tip']])
+print('extract the mentioned columns in the order: loc[:,[time, total_bill, tip]]\n',df_tips.loc[:,['time','total_bill','tip']])
+print('extract the mentioned columns in the order: iloc[:,0:2]\n',df_tips.iloc[:,0:2]) #not correct as it gives total_bill,tip only
 
 #Q4 df.loc[:2,"total_bill":"day"]
 print('print 2 rows with 3 columns :',df_tips.loc[:2,'total_bill':'day'])
-df_cars = pd.read_csv('..\mtcars.csv')
+df_cars = pd.read_csv(os.path.join(assets_path,"mtcars.csv"))
 # print(df_cars)
 #setting model as indexing column
 df_cars.set_index("model",inplace=True)
