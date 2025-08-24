@@ -26,6 +26,8 @@ print('max_marks after reset index:\n',max_marks)
 print('subject wise highest marks with roll number using max_marks with merge:\n',pd.merge(df,max_marks,on=['subject','marks'],how='inner'))
 print('subject wise highest marks with roll number:\n',df.loc[df.groupby('subject')['marks'].idxmax()])
 
+
+# Q4 age category
 data = pd.DataFrame({'name':["Ram","Shyam","Mukesh","Suresh"],'age':[10,18,60,50]})
 print(data)
 def age_category(x):
@@ -38,8 +40,23 @@ def age_category(x):
 data['age'] = data['age'].apply(age_category)
 print(data)
 
+#  Q5 username not following the name rule
+data = {
+    'name': ['Jim', 'Clarke', 'Kent', 'Mark'],
+    'username': ['itsjimhere', 'clark002', 'itskentment', 'markyoumustknow'],
+    'userid': [20, 10, 86, 21]
+}
 
+df = pd.DataFrame(data)
+print('original df:\n',df)
 
+def check(name,username):
+    return name.lower() in username
+ 
+# print('userid not following the rule invalid:\n',df[~(df.apply(lambda x:check(x['name'],x['username']), axis=0))]['userid'])
+print('userid not following the rule:\n',df[~(df.apply(lambda x:check(x['name'],x['username']), axis=1))]['userid'])
+
+# Q6. The island of slice: studend cutoff marks
 data = {
     'name': ['Luffy', 'Chopper', 'Zoro', 'Sanji'],
     'marks': [15, 89, 33, 32]
@@ -47,3 +64,17 @@ data = {
 
 df = pd.DataFrame(data)
 print('marks greater than or equal to constant:\n',df[df['marks'] >= 33]['name'])
+
+# # Q7. DataFrame Manipulation which is wrong
+
+data = {
+    'cust_id': [101, 102, 103, 104],
+    'name': ['rick', 'morty', 'pickle', 'jerry'],
+}
+df = pd.DataFrame(data)
+print('original df:\n',df)
+print('df.isin([101,102,120])\n',df.isin([101,102,120]))
+print('df.isin({cust_id: [101, 102]})\n',df.isin({'cust_id': [101, 102]}))
+print('df.isin(df.cust_id)\n',df.isin(df.cust_id))
+# print('df.name.isnin(rick)\n',df.name.isin('rick')) # wrong way
+print('df.name.isnin(rick)\n',df.name.isin(['rick'])) # correct way
