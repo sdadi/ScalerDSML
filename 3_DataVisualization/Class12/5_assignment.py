@@ -8,7 +8,8 @@ assets_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__fil
 data = pd.read_csv(os.path.join(assets_path,"titanic_big.csv"))
 #https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/021/299/original/final_vg1_-_final_vg_%281%29.csv?1670840166
 os.system('cls')
-
+print('highesh mean fare:\n',data.groupby('embark_town')['fare'].mean())
+exit()
 sns.boxplot(data=data,x='alone',y='age',hue='survived')
 plt.show()
 

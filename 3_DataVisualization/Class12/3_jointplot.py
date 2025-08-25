@@ -20,16 +20,17 @@ top3data = data[
     (data['Platform'].isin(top3platf.index)) &
     (data['Genre'].isin(top3gen.index))
 ]
-# print('input data for all top3 Publisher, Genre and Platform:\n',top3data)
-# plt.title('Joint plot between NA_Sales and EU_Sales')
+print('input data for all top3 Publisher, Genre and Platform:\n',top3data)
+
 sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='scatter')
+plt.title('Joint plot between NA_Sales and EU_Sales')
 # sns.jointplot(data=top3data,x='NA_Sales',y='EU_Sales',hue='Genre',kind='hex')
 plt.show()
-exit()
+
 x = np.random.randn(10000,2)
 print('shape of x:', x.shape)
 
-print('scatter plot of x[:,0] and x[:,1]\n',x[:,0])
+print('scatter plot of x[:,0] and x[:,1]\n',x[:,1])
 plt.title('scatter plot of x[:,0] and x[:,1]')
 plt.scatter(x[:,0],x[:,1])
 plt.show()
